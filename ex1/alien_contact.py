@@ -6,7 +6,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/04/06 18:52:15 by cehenrot        #+#    #+#               #
-#  Updated: 2026/04/07 13:59:01 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/04/07 14:47:30 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -94,7 +94,7 @@ def main() -> None:
            contact_id="AC_2024_001",
            timestamp=datetime.fromisoformat("2026-04-06T16:30"),
            location="Area 51, Nevada",
-           contact_type=ContactType.telepathic,
+           contact_type=ContactType.physical,
            signal_strength=9,
            duration_minutes=45,
            witness_count=2,
