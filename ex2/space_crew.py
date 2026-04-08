@@ -6,7 +6,7 @@
 #  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/04/07 14:14:01 by cehenrot        #+#    #+#               #
-#  Updated: 2026/04/08 10:06:40 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/04/08 14:32:52 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -64,7 +64,7 @@ class SpaceMission(BaseModel):
             raise ValueError("[WARNING] -> More than 50% of crews do not "
                              "have the required number of years service "
                              "(5+ years)")
-        elif not any(m.is_active is True for m in self.crew):
+        elif not all(m.is_active is True for m in self.crew):
             raise ValueError("[WARNING] -> inactive crew members")
         return self
 
@@ -89,7 +89,7 @@ def main() -> None:
                     age=35,
                     specialization="Mission Command",
                     years_experience=10,
-                    is_active=True
+                    is_active=False
                 ),
                 CrewMember(
                     member_id="SC002",
@@ -113,7 +113,7 @@ def main() -> None:
         )
     except ValidationError as e:
         for error in e.errors():
-            print(f"Field: {error['loc']} - Error: {error['msg']}")
+            print(f"Expected validation error:\n{error['msg']}")
         sys.exit(1)
     print(f"Mission: {test1.mission_name}")
     print(f"ID: {test1.mission_id}")

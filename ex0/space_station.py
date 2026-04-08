@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/04/06 11:12:29 by cehenrot        #+#    #+#               #
-#  Updated: 2026/04/08 10:16:14 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/04/08 14:34:02 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -31,7 +31,7 @@ class Spacestation(BaseModel):
     oxygen_level: float = Field(..., ge=0.0, le=100.0)
     last_maintenance: datetime
     is_operational: bool = Field(default=True)
-    notes: Optional[str] = Field(None, max_length=200)
+    notes: Optional[str] = Field(defaut=None, max_length=200)
 
 
 def main() -> None:
