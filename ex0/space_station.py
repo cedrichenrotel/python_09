@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/04/06 11:12:29 by cehenrot        #+#    #+#               #
-#  Updated: 2026/04/08 10:00:31 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/04/08 10:16:14 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -52,8 +52,9 @@ def main() -> None:
             notes="[Optimal]"
         )
     except ValidationError as e:
-        print(f"Expected validation error: {e}")
-        sys.exit(1)
+        for error in e.errors():
+            print(f"Expected validation error:\n{error['msg']}")
+        return
 
     print(f"ID: {model.station_id}")
     print(f"Name: {model.name}")
