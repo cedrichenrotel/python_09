@@ -6,7 +6,7 @@
 #  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/04/07 14:14:01 by cehenrot        #+#    #+#               #
-#  Updated: 2026/04/08 08:32:32 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/04/08 10:06:40 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -115,9 +115,9 @@ def main() -> None:
         for error in e.errors():
             print(f"Field: {error['loc']} - Error: {error['msg']}")
         sys.exit(1)
-
+    print(f"Mission: {test1.mission_name}")
     print(f"ID: {test1.mission_id}")
-    print(f"Destination: {test1.mission_name}")
+    print(f"Destination: {test1.destination}")
     print(f"Duration: {test1.duration_days} days")
     print(f"Budget: ${test1.budget_millions:}M")
     print(f"Crew size: {len(test1.crew)}")
