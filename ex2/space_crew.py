@@ -3,10 +3,10 @@
 #                                                      :::      ::::::::    #
 #  space_crew.py                                     :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
+#  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/04/07 14:14:01 by cehenrot        #+#    #+#               #
-#  Updated: 2026/04/07 19:50:59 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/04/08 08:32:32 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -50,7 +50,7 @@ class SpaceMission(BaseModel):
     budget_millions: float = Field(..., ge=1, le=10000.0)
 
     @model_validator(mode='after')
-    def MissionValidation(self) -> 'CrewMember':
+    def MissionValidation(self) -> 'SpaceMission':
         half = len(self.crew) // 2
         insuf_xp = len([i for i in self.crew if i.years_experience < 5])
 
@@ -62,8 +62,8 @@ class SpaceMission(BaseModel):
             raise ValueError("[WARNING] -> A missing commander or captain")
         elif self.duration_days > 365 and half < insuf_xp:
             raise ValueError("[WARNING] -> More than 50% of crews do not "
-                             "have the "
-                             "required number of years’ service (5+ years)")
+                             "have the required number of years service "
+                             "(5+ years)")
         elif not any(m.is_active is True for m in self.crew):
             raise ValueError("[WARNING] -> inactive crew members")
         return self
@@ -90,6 +90,24 @@ def main() -> None:
                     specialization="Mission Command",
                     years_experience=10,
                     is_active=True
+                ),
+                CrewMember(
+                    member_id="SC002",
+                    name="John Smith",
+                    rank=RankEnum.lieutenant,
+                    age=20,
+                    specialization="Navigation",
+                    years_experience=10,
+                    is_active=True
+                ),
+                CrewMember(
+                    member_id="SC003",
+                    name="Alice Johnson",
+                    rank=RankEnum.officer,
+                    age=18,
+                    specialization="Engineering",
+                    years_experience=5,
+                    is_active=True
                 )
             ]
         )
@@ -102,8 +120,53 @@ def main() -> None:
     print(f"Destination: {test1.mission_name}")
     print(f"Duration: {test1.duration_days} days")
     print(f"Budget: ${test1.budget_millions:}M")
+    print(f"Crew size: {len(test1.crew)}")
     for i in test1.crew:
-        print(f"- {i.member_id} ({i.rank.value}) - {i.specialization}")
+        print(f"- {i.name} ({i.rank.value}) - {i.specialization}")
+
+    print("\n=========================================")
+    try:
+        print("Expected validation error:")
+        test1 = SpaceMission(
+            mission_id="I2024_MARS",
+            mission_name="Mars Colony Establishment",
+            destination="Mars",
+            duration_days=900,
+            budget_millions=2500.0,
+            launch_date=datetime.fromisoformat("2026-03-07T19:38"),
+            crew=[
+                CrewMember(
+                    member_id="SC001",
+                    name="Sarah Connor",
+                    rank=RankEnum.captain,
+                    age=35,
+                    specialization="Mission Command",
+                    years_experience=1,
+                    is_active=True
+                ),
+                CrewMember(
+                    member_id="SC002",
+                    name="John Smith",
+                    rank=RankEnum.cadet,
+                    age=20,
+                    specialization="Navigation",
+                    years_experience=1,
+                    is_active=True
+                ),
+                CrewMember(
+                    member_id="SC003",
+                    name="Alice Johnson",
+                    rank=RankEnum.cadet,
+                    age=18,
+                    specialization="Engineering",
+                    years_experience=1,
+                    is_active=True
+                )
+            ]
+        )
+    except ValidationError as e:
+        for error in e.errors():
+            print(f"Error: {error['msg']}")
 
 
 if __name__ == "__main__":
