@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/04/06 11:12:29 by cehenrot        #+#    #+#               #
-#  Updated: 2026/04/08 14:34:02 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/04/09 15:10:50 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -30,7 +30,7 @@ class Spacestation(BaseModel):
     power_level: float = Field(..., ge=0.0, le=100.0)
     oxygen_level: float = Field(..., ge=0.0, le=100.0)
     last_maintenance: datetime
-    is_operational: bool = Field(default=True)
+    is_operational: bool = True
     notes: Optional[str] = Field(defaut=None, max_length=200)
 
 
@@ -65,6 +65,7 @@ def main() -> None:
         print("Status: Operational")
     else:
         print("Status: Non-operational status")
+    print(f"Notes: {model.notes}")
 
     print("\n========================================")
 
@@ -93,6 +94,7 @@ def main() -> None:
         print("Status: Operational")
     else:
         print("Status: Non-operational status")
+    print(f"Notes: {model_2.notes}")
 
 
 if __name__ == "__main__":

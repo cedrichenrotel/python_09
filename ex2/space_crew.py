@@ -6,7 +6,7 @@
 #  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/04/07 14:14:01 by cehenrot        #+#    #+#               #
-#  Updated: 2026/04/08 14:32:52 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/04/09 14:49:16 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -89,7 +89,7 @@ def main() -> None:
                     age=35,
                     specialization="Mission Command",
                     years_experience=10,
-                    is_active=False
+                    is_active=True
                 ),
                 CrewMember(
                     member_id="SC002",
@@ -128,7 +128,7 @@ def main() -> None:
     try:
         print("Expected validation error:")
         test1 = SpaceMission(
-            mission_id="I2024_MARS",
+            mission_id="MI2024_MARS",
             mission_name="Mars Colony Establishment",
             destination="Mars",
             duration_days=900,
@@ -141,7 +141,7 @@ def main() -> None:
                     rank=RankEnum.captain,
                     age=35,
                     specialization="Mission Command",
-                    years_experience=1,
+                    years_experience=6,
                     is_active=True
                 ),
                 CrewMember(
@@ -150,17 +150,17 @@ def main() -> None:
                     rank=RankEnum.cadet,
                     age=20,
                     specialization="Navigation",
-                    years_experience=1,
+                    years_experience=6,
                     is_active=True
                 ),
                 CrewMember(
                     member_id="SC003",
                     name="Alice Johnson",
                     rank=RankEnum.cadet,
-                    age=18,
+                    age=68,
                     specialization="Engineering",
                     years_experience=1,
-                    is_active=True
+                    is_active=False
                 )
             ]
         )
